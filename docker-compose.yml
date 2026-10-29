@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: node_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      # - .:/app
+      # מניעת דריסה של תיקיית node_modules שבתוך הקונטיינר על ידי התיקייה המקומית
+      - /app/node_modules
+    command: node index.js
